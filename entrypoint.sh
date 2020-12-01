@@ -1,0 +1,1 @@
+exec ${LOGSTASH_HOME}/bin/logstash
