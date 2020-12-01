@@ -25,7 +25,6 @@ RUN curl -L -o /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/down
 && curl -L -o /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
 && export GNUPGHOME="$(mktemp -d)"; \
 ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GOSU_GPG_KEY" \
-    || gpg --keyserver pgp.mit.edu --recv-keys "$GOSU_GPG_KEY" \
     || gpg --keyserver keyserver.pgp.com --recv-keys "$GOSU_GPG_KEY" ); \
 gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
 && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
