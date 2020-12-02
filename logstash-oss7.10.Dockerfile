@@ -38,13 +38,13 @@ gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
 
 ### install filebeats
  
-ENV LOGSTASH_VERSION 7.9.3
-ENV TARBALL_SHA "13d7a2e417d061b838c8be8a2a874f5964fd32c70cb437ab4bab7c4f8a17882b7874dabe53ba6a588250e56557e972b6d1f5be7970debbfbd893d4532705e6f2"
+ENV LOGSTASH_VERSION 7.10.0
+ENV TARBALL_SHA "b9deffe41ef051c851b6a456cebcf66cd2a17de6f49dcac8cdb29189ebbcac0ee286b9973456fa8a37bebbf7ba34295cd192f1f5c9dbbdde7da71fde126c230e"
 ENV LOGSTASH_GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 ENV LOGSTASH_HOME /usr/share/logstash
 ENV DOWNLOAD_URL https://artifacts.elastic.co/downloads/logstash
-ENV LOGSTASH_PACKAGE "${DOWNLOAD_URL}/logstash-oss-${LOGSTASH_VERSION}.tar.gz"
-ENV LOGSTASH_TARBALL_ASC "${DOWNLOAD_URL}/logstash-oss-${VERSION}.tar.gz.asc"
+ENV LOGSTASH_PACKAGE "${DOWNLOAD_URL}/logstash-oss-${LOGSTASH_VERSION}-linux-x86_64.tar.gz"
+ENV LOGSTASH_TARBALL_ASC "${DOWNLOAD_URL}/logstash-oss-${VERSION}-linux-x86_64.tar.gz.asc"
 ENV LOGSTASH_GID 992
 ENV LOGSTASH_UID 992
  
