@@ -88,6 +88,17 @@ RUN ${LOGSTASH_HOME}/bin/logstash-plugin install logstash-filter-geoip
 RUN ${LOGSTASH_HOME}/bin/logstash-plugin install logstash-filter-memcached 
 RUN ${LOGSTASH_HOME}/bin/logstash-plugin install logstash-output-exec
 
+# install aws cli, unzip, jq
+
+RUN apt-get install -y unzip jq
+
+RUN cd /tmp && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm awscliv2.zip 
+    
+
 ### Clean up APT when done.
  
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
