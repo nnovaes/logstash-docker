@@ -25,7 +25,6 @@ RUN curl -L -o /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/down
 && curl -L -o /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
 && export GNUPGHOME="$(mktemp -d)"; \
 ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GOSU_GPG_KEY" \
-    || gpg --keyserver pgp.mit.edu --recv-keys "$GOSU_GPG_KEY" \
     || gpg --keyserver keyserver.pgp.com --recv-keys "$GOSU_GPG_KEY" ); \
 gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
 && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
@@ -37,15 +36,15 @@ gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
 && set +x
  
 
-### install Logstash
+### install filebeats
  
-ENV LOGSTASH_VERSION 7.9.0
-ENV TARBALL_SHA "7304ddfd87c418f5ff52ea7f7db1bcc9f202cd83675373ef53dd0e8007d3b22eb16c77fc09eac8e1318257813fefe3108570bc5d84d088ec3c26d789ab7cacfd"
+ENV LOGSTASH_VERSION 7.10.0
+ENV TARBALL_SHA "b9deffe41ef051c851b6a456cebcf66cd2a17de6f49dcac8cdb29189ebbcac0ee286b9973456fa8a37bebbf7ba34295cd192f1f5c9dbbdde7da71fde126c230e"
 ENV LOGSTASH_GPG_KEY "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 ENV LOGSTASH_HOME /usr/share/logstash
 ENV DOWNLOAD_URL https://artifacts.elastic.co/downloads/logstash
-ENV LOGSTASH_PACKAGE "${DOWNLOAD_URL}/logstash-oss-${LOGSTASH_VERSION}.tar.gz"
-ENV LOGSTASH_TARBALL_ASC "${DOWNLOAD_URL}/logstash-oss-${VERSION}.tar.gz.asc"
+ENV LOGSTASH_PACKAGE "${DOWNLOAD_URL}/logstash-oss-${LOGSTASH_VERSION}-linux-x86_64.tar.gz"
+ENV LOGSTASH_TARBALL_ASC "${DOWNLOAD_URL}/logstash-oss-${VERSION}-linux-x86_64.tar.gz.asc"
 ENV LOGSTASH_GID 992
 ENV LOGSTASH_UID 992
  
@@ -88,6 +87,17 @@ RUN ${LOGSTASH_HOME}/bin/logstash-plugin install logstash-filter-tld
 RUN ${LOGSTASH_HOME}/bin/logstash-plugin install logstash-filter-geoip 
 RUN ${LOGSTASH_HOME}/bin/logstash-plugin install logstash-filter-memcached 
 RUN ${LOGSTASH_HOME}/bin/logstash-plugin install logstash-output-exec
+
+# install aws cli, unzip, jq
+
+RUN apt-get install -y unzip jq
+
+RUN cd /tmp && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm awscliv2.zip 
+    
 
 ### Clean up APT when done.
  
