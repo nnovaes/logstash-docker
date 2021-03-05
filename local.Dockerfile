@@ -71,7 +71,8 @@ COPY --from=0 /usr/share/logstash/oss_pluginpack.zip .
 RUN /usr/share/logstash/bin/logstash-plugin install file:///oss_pluginpack.zip
 
 # copy configs
-COPY ./config/* /etc/logstash
+COPY ./config/* /etc/logstash/config
+COPY ./settings/*  /etc/logstash
 
 # entrypoint script
 
