@@ -1,4 +1,4 @@
-FROM normannovaes/logstash-docker:711_oss_plugins
+FROM normannovaes/logstash-docker:7.11.1_oss_plugins
 
 FROM phusion/baseimage:bionic-1.0.0
 
