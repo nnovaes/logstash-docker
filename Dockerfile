@@ -54,8 +54,8 @@ COPY --from=0 /usr/share/logstash/oss_pluginpack.zip .
 RUN /usr/share/logstash/bin/logstash-plugin install file:///oss_pluginpack.zip
 
 # copy configs
-COPY ./config/ /etc/logstash/config
-COPY ./settings/  /etc/logstash
+COPY ./config/ /usr/share/logstash/config
+
 
 # entrypoint script
 
@@ -64,3 +64,4 @@ RUN sed -i -e 's#^LS_HOME=$#LS_HOME='$LOGSTASH_HOME'#' /opt/entrypoint.sh \
 && chmod +x /opt/entrypoint.sh
 # Override base image entrypoint and run logstash in foreground
 ENTRYPOINT ["/opt/entrypoint.sh"]
+
