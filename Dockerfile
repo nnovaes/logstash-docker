@@ -1,6 +1,9 @@
-FROM normannovaes/logstash-docker:7.11.1_oss_plugins
+FROM normannovaes/logstash-docker:7.11.2_oss_plugins
 
 FROM phusion/baseimage:bionic-1.0.0
+
+#logstash version (run 'apt-cache policy logstash' for version table)
+ENV LOGSTASH_VERSION 7.11.2-1 
 
 # trust keys
 ENV ELASTIC_GPG_KEY 46095ACC8548582C1A2699A9D27D666CD88E42B4
@@ -44,7 +47,7 @@ RUN gpg -a --export 46095ACC8548582C1A2699A9D27D666CD88E42B4 |   apt-key add - &
     apt-get install apt-transport-https && \
     echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list && \
     apt-get update && \
-    apt-get install logstash 
+    apt-get install logstash=1:${LOGSTASH_VERSION} 
 
 #cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

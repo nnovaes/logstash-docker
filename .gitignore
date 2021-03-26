@@ -1,2 +1,2 @@
 .keys
-local.Dockerfile
+local*.Dockerfile
