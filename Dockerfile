@@ -30,15 +30,10 @@ RUN gpg --keyserver https://artifacts.elastic.co/GPG-KEY-elasticsearch --recv-ke
 RUN set -x \
 && apt-get update -qq \
 && apt-get upgrade -y \
-&& apt-get install -qqy --no-install-recommends ca-certificates curl openjdk-8-jdk unzip jq \
+&& apt-get install -qqy --no-install-recommends ca-certificates curl openjdk-8-jdk \
 && rm -rf /var/lib/apt/lists/* \
 && apt-get clean 
 
-RUN cd /tmp && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install && \
-    rm awscliv2.zip 
 
 # install logstash
 RUN gpg -a --export 46095ACC8548582C1A2699A9D27D666CD88E42B4 |   apt-key add - && \
