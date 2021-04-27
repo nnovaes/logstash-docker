@@ -1,7 +1,8 @@
 FROM phusion/baseimage:bionic-1.0.0
 
 #logstash version (run 'apt-cache policy logstash' for version table, 'apt-cache policy logstash | grep Candidate' for latest)
-ENV LOGSTASH_VERSION 7.12.0-1 
+ENV LOGSTASH_VERSION 7.12.1-1 
+
 
 # trust keys
 ENV ELASTIC_GPG_KEY 46095ACC8548582C1A2699A9D27D666CD88E42B4
