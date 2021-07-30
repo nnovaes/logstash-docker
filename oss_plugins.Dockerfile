@@ -1,5 +1,5 @@
-FROM normannovaes/logstash-docker:7.12.1_oss_pluginBase
-FROM normannovaes/logstash-docker:7.12.1_oss_slim
+FROM normannovaes/logstash-docker:7.13.2_pluginBase
+FROM normannovaes/logstash-docker:7.13.2_oss_slim
 
 
  # install plugins
