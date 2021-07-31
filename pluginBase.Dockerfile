@@ -1,5 +1,5 @@
 # image <VERSION>_oss_plugins
-FROM docker.elastic.co/logstash/logstash-oss:7.13.2
+FROM docker.elastic.co/logstash/logstash-oss:7.13.4
 RUN bin/logstash-plugin install \
     logstash-filter-alter \
     logstash-output-amazon_es \

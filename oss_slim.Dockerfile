@@ -1,7 +1,7 @@
 FROM phusion/baseimage:bionic-1.0.0
 
 #logstash version (run 'apt-cache policy logstash' for version table, 'apt-cache policy logstash | grep Candidate' for latest)
-ENV LOGSTASH_VERSION 7.13.2-1
+ENV LOGSTASH_VERSION 7.13.4-1
 
 
 # trust keys
