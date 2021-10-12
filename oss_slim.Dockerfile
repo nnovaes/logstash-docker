@@ -1,7 +1,7 @@
 FROM phusion/baseimage:bionic-1.0.0
 
 #logstash version (run 'apt-cache policy logstash' for version table, 'apt-cache policy logstash | grep Candidate' for latest)
-ENV LOGSTASH_VERSION 7.12.1-1 
+ENV LOGSTASH_VERSION 7.15.0-1
 
 
 # trust keys
@@ -25,20 +25,15 @@ RUN gpg --keyserver https://artifacts.elastic.co/GPG-KEY-elasticsearch --recv-ke
     (echo 5; echo y; echo save) | gpg --command-fd 0 --no-tty --no-greeting -q --edit-key "$(gpg --list-packets <"$ELASTIC_GPG_KEY".asc |awk '$1=="keyid:"{print$2;exit}')" trust 
 
 
-### upgrade, install prerequisites (cURL, gosu, JDK) and extras (unzip, jq, awscli)
+### upgrade, install prerequisites (cURL, gosu, JDK) 
  
 RUN set -x \
 && apt-get update -qq \
 && apt-get upgrade -y \
-&& apt-get install -qqy --no-install-recommends ca-certificates curl openjdk-8-jdk unzip jq \
+&& apt-get install -qqy --no-install-recommends ca-certificates curl openjdk-8-jdk \
 && rm -rf /var/lib/apt/lists/* \
 && apt-get clean 
 
-RUN cd /tmp && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install && \
-    rm awscliv2.zip 
 
 # install logstash
 RUN gpg -a --export 46095ACC8548582C1A2699A9D27D666CD88E42B4 |   apt-key add - && \
