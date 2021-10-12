@@ -1,4 +1,4 @@
-FROM normannovaes/logstash-docker:7.13.4_oss_plugins
+FROM normannovaes/logstash-docker:7.15.0_oss_plugins
 
 RUN set -x \
 && apt-get update -qq \
