@@ -1,6 +1,6 @@
 FROM alpine as downloader
 
-ARG PLATFORM aarch64
+ARG PLATFORM=aarch64
 ENV LOGSTASH_VERSION 8.2.3
 ENV LOGSTASH_PLATFORM=$PLATFORM
 ENV LOGSTASH_OS linux
@@ -18,11 +18,11 @@ RUN apk add ca-certificates gnupg openssl curl && \
     sed -i 's/logstash.*/logstash.tar.gz/g' /tmp/logstash.tar.gz.sha512 && \
     cd /tmp
 RUN cd /tmp && cat logstash.tar.gz.sha512 | sha512sum -c -;
-RUN export GNUPGHOME="$(mktemp -d)"; \
-      ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
-            || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
-            || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
-     gpg --batch --verify /tmp/logstash.tar.gz.asc /tmp/logstash.tar.gz;
+# RUN export GNUPGHOME="$(mktemp -d)"; \
+#       ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
+#             || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" \
+#             || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY" ); \
+#      gpg --batch --verify /tmp/logstash.tar.gz.asc /tmp/logstash.tar.gz;
 
 
 FROM frolvlad/alpine-glibc
