@@ -45,7 +45,7 @@ RUN dos2unix /logstash-entrypoint.sh
 
 RUN chmod +x /*.sh
 
-
+RUN /usr/share/logstash/bin/logstash-plugin update
 
 ENV LS_JAVA_HOME /usr
 EXPOSE 5044 9600
